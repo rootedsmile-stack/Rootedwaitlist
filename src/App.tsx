@@ -3,51 +3,72 @@ import './index.css';
 
 function App() {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('');
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('/api/signup', {
-      method: 'POST',
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    setMessage(data.success ? "You're on the list!" : "Error: " + data.error);
+    setStatus('Joining...');
+    try {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify({ email, name }),
+      });
+      if (res.ok) setStatus('Welcome to the revolution!');
+      else setStatus('Try again shortly.');
+    } catch {
+      setStatus('Error connecting to server.');
+    }
   };
 
   return (
-    <div className="container">
-      <nav>
+    <div className="landing-wrapper">
+      <header>
         <div className="logo">RootedSmile</div>
-      </nav>
+        <nav style={{ display: 'flex', gap: '30px', fontWeight: 500 }}>
+          <span>Product</span>
+          <span>Our Mission</span>
+          <button style={{ background: '#4a5d4e', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '20px' }}>Join</button>
+        </nav>
+      </header>
 
-      <main>
-        <section className="hero">
-          <div className="hero-text">
-            <h1>Brighter Smiles, <br/>Rooted in Nature.</h1>
-            <p>Experience the future of oral wellness. Our new whitening powder comes in a 100% biodegradable <strong>RootedSmile paper tube</strong>.</p>
-            
-            <form onSubmit={handleSignup} className="waitlist-form">
+      <section className="hero-card">
+        <div className="hero-image-side">
+          {/* Your paper tube image will appear here via CSS */}
+        </div>
+        
+        <div className="hero-content-side">
+          <h1>Brighter Smiles, <br/>Rooted in Nature</h1>
+          <p>Experience the future of oral wellness with earth-derived science in our signature RootedSmile paper tube.</p>
+          
+          <div className="waitlist-card">
+            <h3>Join the Rooted Revolution</h3>
+            <p style={{ fontSize: '0.9rem', color: '#666' }}>Be the first to experience the power of nature and receive 30% off your first order.</p>
+            <form onSubmit={handleJoin}>
               <input 
-                type="email" 
-                placeholder="Enter your email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text" 
+                placeholder="Full Name" 
+                onChange={(e) => setName(e.target.value)} 
                 required 
               />
-              <button type="submit">Get Early Access</button>
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                onChange={(e) => setEmail(e.target.value)} 
+                required 
+              />
+              <button type="submit" className="btn-primary">Get Early Access</button>
             </form>
-            {message && <p className="status-msg">{message}</p>}
+            {status && <p style={{ textAlign: 'center', marginTop: '10px' }}>{status}</p>}
           </div>
+        </div>
+      </section>
 
-          <div className="product-visual">
-            <div className="paper-tube-mock">
-               {/* This represents your paper tube box */}
-               <div className="tube-label">RootedSmile</div>
-            </div>
-          </div>
-        </section>
-      </main>
+      <section className="features">
+        <div className="feature-item">🍃<br/><strong>Natural Ingredients</strong></div>
+        <div className="feature-item">🛡️<br/><strong>Scientifically Proven</strong></div>
+        <div className="feature-item">♻️<br/><strong>Eco-Friendly Packaging</strong></div>
+      </section>
     </div>
   );
 }
