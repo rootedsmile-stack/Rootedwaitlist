@@ -1,0 +1,7 @@
+name = "my-oral-care-site"
+pages_build_output_dir = "./dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "oral-care-db"
+database_id = "PASTE_YOUR_DATABASE_ID_HERE"
