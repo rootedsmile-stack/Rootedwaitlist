@@ -1,6 +1,5 @@
 interface Env {
-  DB: D1Database;
-  RESEND_API_KEY: string;
+  DB: D1Database; // This matches the 'binding' in wrangler.toml
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -10,22 +9,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const { email, name } = await request.json() as { email: string; name: string };
 
     if (!email) {
-      return new Response("Email is required", { status: 400 });
+      return new Response(JSON.stringify({ error: "Email is required" }), { status: 400 });
     }
 
-    // 1. Insert into D1 Database
+    // Explicitly targeting the rootedwaitlist table
     await env.DB.prepare(
-      "INSERT INTO waitlist (email, name) VALUES (?, ?)"
-    ).bind(email, name || "Valued Customer").run();
+      "INSERT INTO rootedwaitlist (email, name) VALUES (?, ?)"
+    )
+    .bind(email, name || "Customer")
+    .run();
 
-    // 2. Note: To send the actual email, you'll need to fetch to an 
-    // email API like Resend or MailChannels here.
-    
-    return new Response(JSON.stringify({ message: "Joined successfully!" }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    let message = "Server error";
+    if (error.message.includes("UNIQUE")) message = "Already registered!";
+    
+    return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 };
