@@ -1,84 +1,111 @@
 :root {
-  --earth-green: #4a5d4e;
-  --cream: #fdfaf5;
-  --paper-tan: #e5d3b3;
+  --bg-color: #f4f1ea;
+  --card-bg: #ffffff;
+  --primary-green: #4a5d4e;
+  --text-main: #2d3436;
+  --accent-tan: #d9d2c5;
 }
 
 body {
   margin: 0;
-  background-color: var(--cream);
-  font-family: 'Inter', sans-serif;
-  color: var(--earth-green);
+  background-color: var(--bg-color);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-  max-width: 1100px;
+.landing-wrapper {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-nav {
-  padding: 20px 0;
-  font-weight: bold;
-  font-size: 1.5rem;
-  letter-spacing: -1px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Header/Nav */
+header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 50px;
-  margin-top: 80px;
+  padding: 20px 0;
 }
 
-.hero-text h1 {
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-green);
+}
+
+/* Hero Section */
+.hero-card {
+  background-color: #a3b18a; /* Sage Green background from mockup */
+  border-radius: 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden;
+  min-height: 550px;
+  position: relative;
+}
+
+.hero-image-side {
+  background-image: url('/images/hero-product.jpg'); /* Upload your image here */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content-side {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.hero-content-side h1 {
   font-size: 3.5rem;
   line-height: 1.1;
   margin-bottom: 20px;
 }
 
-.waitlist-form {
-  display: flex;
-  gap: 10px;
-  margin-top: 30px;
+/* Waitlist Floating Card */
+.waitlist-card {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  color: var(--text-main);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-top: 20px;
 }
 
-input[type="email"] {
+.waitlist-card h3 { margin-top: 0; font-size: 1.5rem; }
+
+input {
+  width: 100%;
   padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  flex: 1;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-sizing: border-box;
 }
 
-button {
-  background: var(--earth-green);
+.btn-primary {
+  width: 100%;
+  background: var(--primary-green);
   color: white;
   border: none;
-  padding: 15px 25px;
-  border-radius: 8px;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
-/* Styled Paper Tube Visual */
-.paper-tube-mock {
-  width: 200px;
-  height: 350px;
-  background: var(--paper-tan);
-  margin: 0 auto;
-  border-radius: 100px; /* Makes it cylindrical */
+.btn-primary:hover { opacity: 0.9; }
+
+/* Features Section */
+.features {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 20px 20px 60px #d1c1a4, -20px -20px 60px #ffffff;
-  border: 1px solid #d4c4a8;
+  justify-content: space-around;
+  padding: 60px 0;
+  text-align: center;
 }
 
-.tube-label {
-  transform: rotate(-90deg);
-  font-weight: 900;
-  font-size: 2rem;
-  opacity: 0.7;
-  letter-spacing: 2px;
-}
+.feature-item { max-width: 200px; font-size: 0.9rem; }
