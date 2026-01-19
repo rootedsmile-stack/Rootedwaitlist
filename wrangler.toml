@@ -2,6 +2,6 @@ name = "my-oral-care-site"
 pages_build_output_dir = "./dist"
 
 [[d1_databases]]
-binding = "DB"
-database_name = "oral-care-db"
-database_id = "PASTE_YOUR_DATABASE_ID_HERE"
+binding = "DB" # This is the variable name used in your code
+database_name = "rooted-db" 
+database_id = "07dd8fe0-3859-4a90-b452-577203b4e5c1"
