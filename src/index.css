@@ -1,0 +1,84 @@
+:root {
+  --earth-green: #4a5d4e;
+  --cream: #fdfaf5;
+  --paper-tan: #e5d3b3;
+}
+
+body {
+  margin: 0;
+  background-color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  color: var(--earth-green);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+nav {
+  padding: 20px 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  margin-top: 80px;
+}
+
+.hero-text h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.waitlist-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+input[type="email"] {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  flex: 1;
+}
+
+button {
+  background: var(--earth-green);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Styled Paper Tube Visual */
+.paper-tube-mock {
+  width: 200px;
+  height: 350px;
+  background: var(--paper-tan);
+  margin: 0 auto;
+  border-radius: 100px; /* Makes it cylindrical */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 20px 20px 60px #d1c1a4, -20px -20px 60px #ffffff;
+  border: 1px solid #d4c4a8;
+}
+
+.tube-label {
+  transform: rotate(-90deg);
+  font-weight: 900;
+  font-size: 2rem;
+  opacity: 0.7;
+  letter-spacing: 2px;
+}
